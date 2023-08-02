@@ -1,24 +1,41 @@
-// Lista de contactos con datos predefinidos
+// Lista de contactos con datos predefinidos como objetos
 const listaDeContactos = [
-    "Juan Pérez",
-    "María Rodríguez",
-    "Carlos López"
+    {
+      id: 1,
+      nombres: "Juan",
+      apellidos: "Pérez",
+      telefono: "123456789",
+      ubicaciones: {
+        ciudad: "Ciudad A",
+        direccion: "Calle 123"
+      }
+    },
+    {
+      id: 2,
+      nombres: "María",
+      apellidos: "Rodríguez",
+      telefono: "987654321",
+      ubicaciones: {
+        ciudad: "Ciudad B",
+        direccion: "Avenida XYZ"
+      }
+    }
   ];
   
   // Función para añadir un nuevo contacto a la lista
-  function agregarContacto(nombreCompleto) {
-    listaDeContactos.push(nombreCompleto);
-    console.log("Contacto agregado: " + nombreCompleto);
+  function agregarContacto(contacto) {
+    listaDeContactos.push(contacto);
+    console.log("Contacto agregado:", contacto);
   }
   
-  // Función para borrar un contacto existente de la lista
-  function borrarContacto(nombreCompleto) {
-    const indice = listaDeContactos.indexOf(nombreCompleto);
+  // Función para borrar un contacto existente de la lista por su ID
+  function borrarContactoPorId(id) {
+    const indice = listaDeContactos.findIndex(contacto => contacto.id === id);
     if (indice !== -1) {
-      listaDeContactos.splice(indice, 1);
-      console.log("Contacto borrado: " + nombreCompleto);
+      const contactoBorrado = listaDeContactos.splice(indice, 1)[0];
+      console.log("Contacto borrado:", contactoBorrado);
     } else {
-      console.log("El contacto no existe en la lista.");
+      console.log("El contacto con ID", id, "no existe en la lista.");
     }
   }
   
@@ -31,13 +48,23 @@ const listaDeContactos = [
   }
   
   // Agregar un nuevo contacto
-  agregarContacto("Laura Gómez");
+  const nuevoContacto = {
+    id: 3,
+    nombres: "Laura",
+    apellidos: "Gómez",
+    telefono: "555555555",
+    ubicaciones: {
+      ciudad: "Ciudad C",
+      direccion: "Calle Principal"
+    }
+  };
+  agregarContacto(nuevoContacto);
   
   // Imprimir la lista de contactos
   imprimirContactos();
   
-  // Borrar un contacto
-  borrarContacto("María Rodríguez");
+  // Borrar un contacto por su ID
+  borrarContactoPorId(2);
   
   // Imprimir la lista de contactos actualizada
   imprimirContactos();
