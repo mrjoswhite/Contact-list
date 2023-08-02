@@ -38,7 +38,32 @@ const listaDeContactos = [
       console.log("El contacto con ID", id, "no existe en la lista.");
     }
   }
-  
+  // Función para actualizar un contacto existente por su ID
+function actualizarContactoPorId(id, nuevoDatos) {
+  const indice = listaDeContactos.findIndex(contacto => contacto.id === id);
+  if (indice !== -1) {
+    listaDeContactos[indice] = { ...listaDeContactos[indice], ...nuevoDatos };
+    console.log("Contacto actualizado:", listaDeContactos[indice]);
+  } else {
+    console.log("El contacto con ID", id, "no existe en la lista.");
+  }
+}
+
+// Actualizar un contacto por su ID
+const idContactoActualizar = 1;
+const nuevosDatos = {
+  nombres: "Juan Carlos",
+  telefono: "555666777",
+  ubicaciones: {
+    ciudad: "Ciudad D",
+    direccion: "Avenida Nueva"
+  }
+};
+actualizarContactoPorId(idContactoActualizar, nuevosDatos);
+
+// Imprimir la lista de contactos actualizada
+imprimirContactos();
+
   // Función para imprimir en consola los contactos presentes en la lista
   function imprimirContactos() {
     console.log("Lista de contactos:");
